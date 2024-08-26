@@ -62,7 +62,13 @@ const createPlace = async (req, res, next) => {
 
   const { title, description, address, creator } = req.body;
 
-  const coords = getCoordinates(address);
+  let coords;
+
+  try {
+    coords = await getCoordinates(address);
+  } catch (error) {
+    return next(error);
+  }
 
   const createdPlace = new Place({
     title,
