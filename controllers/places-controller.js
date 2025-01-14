@@ -129,6 +129,11 @@ const updatePlace = async (req, res, next) => {
     return next(err);
   }
 
+  if (place.creator.toString() !== req.userData.userId) {
+    const err = new HttpError("You are not allowed to update this place", 401);
+    return next(err);
+  }
+
   place.title = title;
   place.description = description;
 
