@@ -1,6 +1,8 @@
 const axios = require("axios");
 
 const HttpError = require("../models/http-error");
+require("dotenv").config({ path: ".env.local" });
+console.log("Loaded connectionString:", process.env.API_GOOGLE_KEY);
 
 const API_KEY = process.env.API_GOOGLE_KEY;
 
