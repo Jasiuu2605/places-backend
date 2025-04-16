@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
 const HttpError = require("./models/http-error");
-const privateData = require("./private-data");
 
 const app = express();
 
@@ -49,9 +48,10 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(privateData.connectionString)
+  .connect(process.env.connectionString)
   .then(() => {
     app.listen(5001);
   })
   .catch((err) => {
+    console.error(err);
   });
